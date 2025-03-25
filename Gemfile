@@ -44,3 +44,10 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
+
+# google-api-client for Google Calendar API
+gem 'google-api-client'
+gem 'google-apis-calendar_v3'
+gem 'googleauth'
+
+gem 'dotenv', groups: [:development, :test]
