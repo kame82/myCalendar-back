@@ -31,3 +31,6 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Google Auth認証用のJSONファイルを無視
+/apt-advantage-451800-u4-a51bf140593d.json
