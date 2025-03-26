@@ -46,7 +46,7 @@ group :development do
 end
 
 # google-api-client for Google Calendar API
-gem 'google-api-client'
+# gem 'google-api-client'
 gem 'google-apis-calendar_v3'
 gem 'googleauth'
 
