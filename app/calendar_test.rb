@@ -34,20 +34,10 @@ class GoogleCalendar
 
   end
 
-  # def set_event(summary:, description:, location:, start:, end:)
-  #   Google::Apis::CalendarV3::Event.new(
-  #       summary: summary,
-  #       description: description,
-  #       location: location,
-  #       start: Google::Apis::CalendarV3::EventDateTime.new(date_time: start_time),
-  #       end: Google::Apis::CalendarV3::EventDateTime.new(date_time: end_time)
-  #   )
-  # end
-
   def read
     events = @calendar.list_events(@calendar_id,
-    time_min: Time.new(2025,1,1).iso8601,
-    time_max: Time.new(2025,1,31).iso8601,)
+    time_min: Time.new(2025,3,27).iso8601,
+    time_max: Time.new(2025,3,28).iso8601,)
 
     puts events.items
     events.items.each do |event|
@@ -57,7 +47,8 @@ class GoogleCalendar
   end
 
   def puts_event(event)
-    puts "ID: #{event.id}"
+    puts "id: #{event.id}"
+    puts "summary: #{event.summary}"
     puts "description: #{event.description}"
     puts "color_id: #{event.color_id}"
     puts "Event: #{event.summary}"
@@ -65,7 +56,29 @@ class GoogleCalendar
     puts "End: #{event.end.date_time || event.end.date}"
     puts "reminders: #{event.reminders}"
   end
-end
 
+  def create(summary: "無題", description: nil, location: nil, start_time: DateTime.now, end_time: DateTime.now + 1.0/24)
+    event = set_event(summary, description, location, start_time, end_time)
+    result = @calendar.insert_event(@calendar_id, event)
+    puts "Event created: #{result.html_link}"
+  end
+
+  def update(event_id)
+    event = set_event("Updated", "Updated" ,"Updated" ,DateTime.now + 1.0/24 ,DateTime.now + 2.0/24 )
+    result = @calendar.update_event(@calendar_id, event_id, event)
+  end
+
+  def set_event(summary, description, location, start_time, end_time)
+    Google::Apis::CalendarV3::Event.new(
+      summary: summary,
+      description: description,
+      location: location,
+      start: Google::Apis::CalendarV3::EventDateTime.new(date_time: start_time),
+      end: Google::Apis::CalendarV3::EventDateTime.new(date_time: end_time),
+    )
+  end
+
+end
 # クラスのインスタンスを作成し、メソッドを呼び出す
- GoogleCalendar.new.read
+GoogleCalendar.new.read
+# GoogleCalendar.new.create(summary: "テスト", description: "テスト", location: "テスト", start_time: DateTime.now, end_time: DateTime.now + 1.0/24)
