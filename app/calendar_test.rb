@@ -78,6 +78,10 @@ class GoogleCalendar
     )
   end
 
+  def delete(event_id)
+    @calendar.delete_event(@calendar_id, event_id)
+  end
+
 end
 # クラスのインスタンスを作成し、メソッドを呼び出す
 GoogleCalendar.new.read
