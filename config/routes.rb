@@ -7,4 +7,8 @@ Rails.application.routes.draw do
   #
   # Defines the root path route ("/")
   # root "posts#index"
+
+  get 'auth/:provider/callback', to: 'session#create'
+  get 'auth/failure', to: redirect('/')
+  post 'logout', to: 'session#destroy', as: 'logout'
 end
