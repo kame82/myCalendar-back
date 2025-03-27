@@ -50,4 +50,7 @@ end
 gem 'google-apis-calendar_v3'
 gem 'googleauth'
 
+# omniauth-google-oauth2 for Google OAuth2
+gem 'omniauth-google-oauth2'
+
 gem 'dotenv', groups: [:development, :test]
