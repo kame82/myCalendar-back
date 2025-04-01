@@ -194,6 +194,9 @@ GEM
     omniauth-oauth2 (1.8.0)
       oauth2 (>= 1.4, < 3)
       omniauth (~> 2.0)
+    omniauth-rails_csrf_protection (1.0.2)
+      actionpack (>= 4.2)
+      omniauth (~> 2.0)
     os (1.1.4)
     pg (1.5.9)
     pp (0.6.2)
@@ -295,6 +298,7 @@ DEPENDENCIES
   google-apis-calendar_v3
   googleauth
   omniauth-google-oauth2
+  omniauth-rails_csrf_protection
   pg (~> 1.1)
   puma (>= 5.0)
   rack-cors

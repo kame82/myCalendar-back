@@ -52,5 +52,7 @@ gem 'googleauth'
 
 # omniauth-google-oauth2 for Google OAuth2
 gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
+
 
 gem 'dotenv', groups: [:development, :test]
