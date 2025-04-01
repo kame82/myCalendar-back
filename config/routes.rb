@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   root to: 'application#health_check' # 動作確認用
 
-  post 'auth/:provider/callback', to: 'sessions#create'
+  get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
   post 'logout', to: 'sessions#destroy', as: 'logout'
 end
