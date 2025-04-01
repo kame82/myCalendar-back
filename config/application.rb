@@ -33,6 +33,9 @@ module App
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    config.middleware.use ActionDispatch::Cookies # クライアントとのやりとりでCookieを扱えるようにする。
+    config.middleware.use ActionDispatch::Session::CookieStore # sessionメソッドを扱えるようにする（セッションデータを暗号化してCookieに保存する）
+
     config.generators do |g|
       g.assets false
       g.skip_routes true
