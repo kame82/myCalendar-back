@@ -13,8 +13,8 @@ class SessionsController < ApplicationController
       Rails.logger.info("User already exists")
       redirect_to "#{frontend_url}/?token=#{token}",allow_other_host: true
     else
-      Rails.logger.info.("User does not exist")
-      user = User.create(name: user_info['info']['name'], email:user_info['info']['email'])
+      Rails.logger.info("User does not exist")
+      user = User.create(name: user_info['info']['name'], email:user_info['info']['email'], image: user_info['info']['image'])
       UserAuthentication.create( user_id: user.id, uid: google_user_id, provider: provider)
       redirect_to "#{frontend_url}/?token=#{token}", allow_other_host: true
     end
@@ -28,6 +28,7 @@ class SessionsController < ApplicationController
   def generate_token_with_google_user_id(google_user_id, provider)
     exp = Time.now.to_i + 24 *3600
     payload = { google_user_id: google_user_id, provider: provider, exp: exp }
+    hmac_secret = ENV['JWT_SECRET_KEY']
     JWT.encode( payload, hmac_secret, 'HS256' )
   end
 end
