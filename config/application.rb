@@ -34,7 +34,7 @@ module App
     config.api_only = true
 
     config.middleware.use ActionDispatch::Cookies # クライアントとのやりとりでCookieを扱えるようにする。
-    config.middleware.use ActionDispatch::Session::CookieStore # sessionメソッドを扱えるようにする（セッションデータを暗号化してCookieに保存する）
+    config.middleware.use ActionDispatch::Session::CookieStore, key: "_my_calender_app_session" # sessionメソッドを扱えるようにする（セッションデータを暗号化してCookieに保存する）
 
     config.generators do |g|
       g.assets false
