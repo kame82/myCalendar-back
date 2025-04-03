@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  skip_before_action :authenticate_request, only: [:create]
 
   def create
     frontend_url = ENV['REACT_APP_API_URL']
