@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   def destroy;end
 
   def current
+    puts "------------------------****************"
     if @current_user
       render json: {user: @current_user}
     else

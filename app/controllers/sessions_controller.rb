@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
       redirect_to "#{frontend_url}/?token=#{token}",allow_other_host: true
     else
       Rails.logger.info("User does not exist")
-      user = User.create(name: user_info['info']['name'], email:user_info['info']['email'], image: user_info['info']['image'])
+      user = User.create(name: user_info['info']['name'], email:user_info['info']['email'])
       UserAuthentication.create( user_id: user.id, uid: google_user_id, provider: provider)
       redirect_to "#{frontend_url}/?token=#{token}", allow_other_host: true
     end
