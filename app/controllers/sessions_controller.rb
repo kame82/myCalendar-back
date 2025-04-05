@@ -7,11 +7,24 @@ class SessionsController < ApplicationController
     google_user_id = user_info['uid']
     provider = user_info['provider']
     token = generate_token_with_google_user_id(google_user_id, provider)
+    access_token = user_info['credentials']['token']
+    refresh_token = user_info['credentials']['refresh_token']
+
+    hashed_access_token = UserAuthentication.hash_token(access_token)
+    hashed_refresh_token = UserAuthentication.hash_token(refresh_token) if refresh_token
 
     user_authentication = UserAuthentication.find_by(uid: google_user_id, provider: provider)
 
     if user_authentication
       Rails.logger.info("User already exists")
+      if refresh_token == nil
+        Rails.logger.info("Refresh token is nil")
+        user_authentication.update(access_token: hashed_access_token)
+      else
+        Rails.logger.info("Refresh token is exist")
+        user_authentication.update(access_token: hashed_access_token, refresh_token: hashed_refresh_token)
+      end
+
       redirect_to "#{frontend_url}/?token=#{token}",allow_other_host: true
     else
       Rails.logger.info("User does not exist")
