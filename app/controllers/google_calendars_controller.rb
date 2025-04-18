@@ -6,7 +6,7 @@ class GoogleCalendarsController < ApplicationController
     def initialize(user)
       @calendar = Google::Apis::CalendarV3::CalendarService.new
       if user.user_authentication.nil?
-        raise "UserAuthentication is missing for user: #{user.id}"
+        raise Exceptions::MissingUserAuthenticationError.new(user.id)
       end
       @calendar.authorization =  user.user_authentication.access_token  ##-- あとでcurrent_userから取得するように修正.--##
       # アプリケーションの名前を設定（GCPで設定したサービスアカウント名）
