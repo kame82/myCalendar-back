@@ -57,6 +57,6 @@ gem 'jwt'
 
 gem 'dotenv', groups: [:development, :test]
 
-# group :development do
-#   gem 'pry-byebug'
-# end
+group :development do
+  gem 'pry-byebug'
+end
