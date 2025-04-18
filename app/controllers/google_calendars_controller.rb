@@ -24,13 +24,18 @@ class GoogleCalendarsController < ApplicationController
       events = @calendar.list_events(@calendar_id,
       time_min: Time.new(2025,3,27).iso8601,
       time_max: Time.new(2025,3,28).iso8601,)
-      puts "--------------------event-----------------------"
-      puts events.items.inspect
-      puts "--------------------event-----------------------"
-      # events.items.each do |event|
-      #   puts '-------------------------------'
-      #   puts_event(event)
-      # end
+      events.items.each do |event|
+        puts '-------------------------------'
+        puts_event(event)
+      end
+    end
+
+    def puts_event(event)
+      puts "Event: #{event.summary}"
+      puts "description: #{event.description}"
+      puts "Start: #{event.start.date_time || event.start.date}"
+      puts "End: #{event.end.date_time || event.end.date}"
+      puts "reminders: #{event.reminders}"
     end
   end
 end
