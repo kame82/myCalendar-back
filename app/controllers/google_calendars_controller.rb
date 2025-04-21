@@ -22,8 +22,7 @@ class GoogleCalendarsController < ApplicationController
 
 private
   def set_calendar_service
-    # user = User.find_by(id: params[:user_id])
-    user = @current_user #検証のため、一旦最初にログインしているユーザーを取得
+    user = @current_user
     if user.nil?
       raise Exceptions::UserNotFoundError.new(params[:user_id])
     end
@@ -32,13 +31,11 @@ private
     # if user.user_authentication.nil?
     #   raise Exceptions::MissingUserAuthenticationError.new(user.id)
     # end
-    @calendar.authorization =  user.user_authentication.access_token  ##-- あとでcurrent_userから取得するように修正.--##
+    @calendar.authorization =  user.user_authentication.access_token
     # アプリケーションの名前を設定（GCPで設定したサービスアカウント名）
     @calendar.client_options.application_name = ENV['GOOGLE_CALENDAR_APPLICATION_NAME']
     # 利用するカレンダーのID(GCPで設定したメールアドレス)を設定する
     @calendar_id = user.email
-
-    @calendar.client_options.log_http_requests = false #-- ログ出力を無効にする（設定したが効果なさそう）
 
     # puts "Google Calendar API initialized"
   end
