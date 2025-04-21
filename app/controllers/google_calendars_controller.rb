@@ -23,7 +23,7 @@ class GoogleCalendarsController < ApplicationController
 private
   def set_calendar_service
     # user = User.find_by(id: params[:user_id])
-    user =User.first #検証のため、一旦最初にログインしているユーザーを取得
+    user = @current_user #検証のため、一旦最初にログインしているユーザーを取得
     if user.nil?
       raise Exceptions::UserNotFoundError.new(params[:user_id])
     end
