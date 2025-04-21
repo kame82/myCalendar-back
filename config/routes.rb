@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
   post 'logout', to: 'sessions#destroy', as: 'logout'
+
+  get 'google_calendars', to: 'google_calendars#read'
 end
